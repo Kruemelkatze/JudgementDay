@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5696a01adce3247a8ddf4fa76d3866, type: 3}
   m_Name: Bert_ClipSentenced
   m_EditorClassIdentifier: 
-  clipType: 0
-  videoClip: {fileID: 0}
+  clipType: 3
+  videoClipURL: Mathias720p.mp4
   shouldLoop: 0
   keyFrameData: []

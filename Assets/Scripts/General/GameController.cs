@@ -11,7 +11,7 @@ public enum PlayerRequests
     Sentence
 }
 
-public delegate void PlayerRequestDelegate(PlayerRequests request);
+public delegate void PlayerRequestDelegate(PlayerRequests request, int value);
 public delegate void VoidDelegate();
 public class GameController : Singleton<GameController>
 {
@@ -24,6 +24,8 @@ public class GameController : Singleton<GameController>
     public GameState GameState => gameState;
 
     private GameState _prePauseState = GameState.Starting;
+
+    public EInterviewState interviewState = EInterviewState.NoSubject;
 
 
     private void Awake()
@@ -48,7 +50,7 @@ public class GameController : Singleton<GameController>
 
     private void NotifyInterviewProgression(SubjectInformation currentSubject, EInterviewState interviewState)
     {
-
+        this.interviewState = interviewState;
     }
 
     private void Update()
@@ -57,8 +59,32 @@ public class GameController : Singleton<GameController>
         {
             SetPause(gameState != GameState.Paused);
         }
+        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            switch(interviewState)
+            {
+                case EInterviewState.NoSubject:
+                    RequestNextSubject();
+                    break;
+                case EInterviewState.AwaitingSentenceInput:
+                    ChooseSentence(0);
+                    break;
+            }
+        }
     }
 
+    public void ChooseSentence(int value)
+    {
+        if(interviewState == EInterviewState.AwaitingSentenceInput)
+        {
+            onPlayerRequest?.Invoke(PlayerRequests.Sentence, value);
+        }
+    }
+
+    public void RequestNextSubject()
+    {
+        onPlayerRequest?.Invoke(PlayerRequests.NextSubject, 0);
+    }
     //  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ PUBLIC  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void PauseGame() => SetPause(true);
     public void ContinueGame() => SetPause(false);
