@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using General;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -22,6 +23,5 @@ public class ScreenRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

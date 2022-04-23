@@ -698,6 +698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 303887677}
   - component: {fileID: 303887676}
+  - component: {fileID: 303887680}
   - component: {fileID: 303887679}
   - component: {fileID: 303887678}
   m_Layer: 0
@@ -725,14 +726,14 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: C:/Users/fschober/Projects/DPS/JudgementDay/Assets/StreamingAssets\Mathias720p.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -807,6 +808,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303887675}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &303887680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303887675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed69f0f74478b04fbee5fd05abced17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoName: Mathias720p.mp4
+  isValid: 0
 --- !u!1 &312368483
 GameObject:
   m_ObjectHideFlags: 0
