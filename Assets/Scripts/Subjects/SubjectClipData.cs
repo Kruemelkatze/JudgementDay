@@ -5,7 +5,7 @@ using UnityEngine.Video;
 
 public enum ESubjectClipType
 {
-    Intro,
+    Entry,
     Confession,
     AwaitSentencing,
     Sentenced
@@ -23,7 +23,7 @@ public struct ClipKeyframeData
 public class SubjectClipData : ScriptableObject
 {
     public ESubjectClipType clipType;
-    public VideoClip videoClip;
+    public string videoClipURL;
     public bool shouldLoop;
     public List<ClipKeyframeData> keyFrameData;
 }

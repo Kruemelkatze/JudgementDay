@@ -7,22 +7,22 @@ using UnityEngine.Video;
 [CreateAssetMenu(fileName = "SubjectInformation", menuName ="GameData/SubjectInformation")]
 public class SubjectInformation : ScriptableObject
 {
-    public SubjectClipData intro;
-    public SubjectClipData interview;
-    public SubjectClipData idle;
+    public SubjectClipData entry;
+    public SubjectClipData confession;
+    public SubjectClipData awaitingSentence;
     public SubjectClipData sentenced;
     public SubjectClipData GetClipData(ESubjectClipType type)
     {
         switch(type)
         {
             case ESubjectClipType.AwaitSentencing:
-                return idle;
+                return awaitingSentence;
             case ESubjectClipType.Confession:
-                return interview;
+                return confession;
             case ESubjectClipType.Sentenced:
                 return sentenced;
-            case ESubjectClipType.Intro:
-                return intro;
+            case ESubjectClipType.Entry:
+                return entry;
         }
         return null;
     }

@@ -25,6 +25,8 @@ public class GameController : Singleton<GameController>
 
     private GameState _prePauseState = GameState.Starting;
 
+    public EInterviewState interviewState = EInterviewState.NoSubject;
+
 
     private void Awake()
     {
@@ -48,7 +50,7 @@ public class GameController : Singleton<GameController>
 
     private void NotifyInterviewProgression(SubjectInformation currentSubject, EInterviewState interviewState)
     {
-
+        this.interviewState = interviewState;
     }
 
     private void Update()
@@ -56,6 +58,18 @@ public class GameController : Singleton<GameController>
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             SetPause(gameState != GameState.Paused);
+        }
+        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            switch(interviewState)
+            {
+                case EInterviewState.NoSubject:
+                    onPlayerRequest?.Invoke(PlayerRequests.NextSubject);
+                    break;
+                case EInterviewState.AwaitingSentenceInput:
+                    onPlayerRequest?.Invoke(PlayerRequests.Sentence);
+                    break;
+            }
         }
     }
 

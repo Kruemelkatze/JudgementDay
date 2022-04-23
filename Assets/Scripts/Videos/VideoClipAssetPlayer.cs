@@ -14,23 +14,28 @@ namespace Videos
 
         private void Awake()
         {
-            SetVideoURL();
+            SetVideoURL(videoName);
         }
 
         private void OnValidate()
         {
-            SetVideoURL();
+            //SetVideoURL(videoName);
         }
 
-        private void SetVideoURL()
+        public void SetVideoURL(string filename)
         {
             var videoPlayer = GetComponent<VideoPlayer>();
 
-            if (!videoPlayer || videoPlayer.clip || string.IsNullOrWhiteSpace(videoName))
+            if (!videoPlayer ||  string.IsNullOrWhiteSpace(filename))
                 return;
+            if(videoPlayer.clip)
+            {
+                Debug.LogError("videoPlayer already has clip");
+                return;
+            }
 
             videoPlayer.source = VideoSource.Url;
-            videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoName);
+            videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, filename);
         }
     }
 }
