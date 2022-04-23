@@ -37,9 +37,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorCutoff: 0.504
-    - _ColorFeathering: 0.33
-    - _Despill: 0.224
+    - _ColorCutoff: 0.471
+    - _ColorFeathering: 0.229
+    - _Despill: 0.306
     - _DespillLuminanceAdd: 0.47
     - _EnableExternalAlpha: 0
     - _MaskFeathering: 1
