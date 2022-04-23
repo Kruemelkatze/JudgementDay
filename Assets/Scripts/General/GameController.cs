@@ -25,7 +25,7 @@ public class GameController : Singleton<GameController>
 
     private GameState _prePauseState = GameState.Starting;
 
-    public EInterviewState interviewState = EInterviewState.NoSubject;
+    public EInterviewState interviewState = EInterviewState.Setup;
 
 
     private void Awake()
