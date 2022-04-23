@@ -15,9 +15,9 @@ public class SubjectInformation : ScriptableObject
     {
         switch(type)
         {
-            case ESubjectClipType.Idle:
+            case ESubjectClipType.AwaitSentencing:
                 return idle;
-            case ESubjectClipType.Interview:
+            case ESubjectClipType.Confession:
                 return interview;
             case ESubjectClipType.Sentenced:
                 return sentenced;

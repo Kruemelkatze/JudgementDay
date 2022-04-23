@@ -6,8 +6,8 @@ using UnityEngine.Video;
 public enum ESubjectClipType
 {
     Intro,
-    Interview,
-    Idle,
+    Confession,
+    AwaitSentencing,
     Sentenced
 };
 

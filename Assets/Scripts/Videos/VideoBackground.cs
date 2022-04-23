@@ -18,7 +18,7 @@ public class VideoBackground : MonoBehaviour
     public SubjectInformation currentSubject = null;
 
     public VideoClip defaultClip = null;
-    public SubjectClipData currentClipData;
+    public SubjectClipData currentClipData = null;
     private void Awake()
     {
         videoPlayer = GetComponent<VideoPlayer>();
@@ -27,10 +27,70 @@ public class VideoBackground : MonoBehaviour
         Hub.Register<VideoBackground>(this);
     }
 
-    public void NotifySetupSubjectData(SubjectInformation subject)
+    private void Start()
     {
-        currentSubject = subject;
-        currentClipData = subject.GetClipData(ESubjectClipType.Idle);
+        Hub.Get<Interview>().onInterviewProgression += NotifyInterviewProgression;
+    }
+
+    private void NotifyInterviewProgression(SubjectInformation currentSubject, EInterviewState interviewState)
+    {
+        switch(interviewState)
+        {
+            case EInterviewState.ExecutingSentence:
+                PlayJudgement();
+                break;
+            case EInterviewState.SubjectIntro:
+                PlayIntro();
+                break;
+            case EInterviewState.AwaitingSentenceInput:
+                PlayAwaitSentence();
+                break;
+            case EInterviewState.NoSubject:
+                PlayNoSubject();
+                break;
+            case EInterviewState.Confession:
+                PlayConfession();
+                break;
+        }
+    }
+
+    private void PlayConfession()
+    {
+        Debug.Assert(currentSubject != null);
+        PlayAnimation(ESubjectClipType.Confession, false);
+    }
+
+    private void PlayNoSubject()
+    {
+        currentClipData = null;
+        currentSubject = null;
+        videoPlayer.Stop();
+        videoPlayer.clip = null;
+
+    }
+
+    private void PlayAwaitSentence()
+    {
+        Debug.Assert(currentSubject != null);
+        PlayAnimation(ESubjectClipType.AwaitSentencing, true);
+    }
+
+    private void PlayIntro()
+    {
+        Debug.Assert(currentSubject != null);
+        PlayAnimation(ESubjectClipType.Intro, false);
+    }
+
+    private void PlayJudgement()
+    {
+        Debug.Assert(currentSubject != null);
+        PlayAnimation(ESubjectClipType.Sentenced, false);
+    }
+
+    private void PlayAnimation(ESubjectClipType clip, bool loop)
+    {
+        currentClipData = currentSubject.GetClipData(clip);
+        videoPlayer.isLooping = loop;
         videoPlayer.clip = currentClipData.videoClip;
         videoPlayer.Prepare();
     }

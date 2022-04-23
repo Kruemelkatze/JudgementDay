@@ -2,11 +2,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using General;
+using System;
 
+public enum PlayerRequests
+{
+    NextSubject,
+    Sentence
+}
+
+public delegate void PlayerRequestDelegate(PlayerRequests request);
+public delegate void VoidDelegate();
 public class GameController : Singleton<GameController>
 {
+    public PlayerRequestDelegate onPlayerRequest;
     [SerializeField] private GameState gameState;
-
+    
     [Header("UI")] [SerializeField] private GameObject gameUi;
     [SerializeField] private GameObject pauseUi;
     
@@ -14,12 +25,14 @@ public class GameController : Singleton<GameController>
 
     private GameState _prePauseState = GameState.Starting;
 
+
     private void Awake()
     {
         if (!ThisIsTheSingletonInstance())
         {
             return;
         }
+        Hub.Register<GameController>(this);
     }
 
     private void Start()
@@ -28,8 +41,14 @@ public class GameController : Singleton<GameController>
 
         gameState = GameState.Starting;
 
+        Hub.Get<Interview>().onInterviewProgression += NotifyInterviewProgression;
         // Do load Stuff
         gameState = GameState.Playing;
+    }
+
+    private void NotifyInterviewProgression(SubjectInformation currentSubject, EInterviewState interviewState)
+    {
+
     }
 
     private void Update()
