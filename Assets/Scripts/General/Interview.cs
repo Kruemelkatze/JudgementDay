@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum EInterviewState
 {
@@ -24,6 +25,9 @@ public class Interview : MonoBehaviour
     public EInterviewState interviewState = EInterviewState.NoSubject;
     public int numSubjectsToJudge = 5;
 
+    public GameObject entrySmokeParticles;
+    public GameObject sentenceFireParticles;
+
     private void Awake()
     {
         numSubjectsToJudge = Math.Min(Subjects.Count, numSubjectsToJudge);
@@ -40,7 +44,7 @@ public class Interview : MonoBehaviour
     IEnumerator StartGameAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        NotifyPlayerRequest(PlayerRequests.NextSubject);
+        NotifyPlayerRequest(PlayerRequests.NextSubject, 0);
     }
 
     private void NotifySubjectClipCompleted(SubjectClipData clip, bool isLoopingClip)
@@ -85,7 +89,7 @@ public class Interview : MonoBehaviour
         interviewState = EInterviewState.Confession;
         onInterviewProgression?.Invoke(currentSubject, interviewState);
     }
-    private void NotifyPlayerRequest(PlayerRequests request)
+    private void NotifyPlayerRequest(PlayerRequests request, int value)
     {
         if(request == PlayerRequests.NextSubject)
         {
@@ -93,8 +97,9 @@ public class Interview : MonoBehaviour
             Debug.Assert(interviewState == EInterviewState.NoSubject);
             if (Subjects.Count > 0)
             {
-                currentSubject = Subjects[0];
-                Subjects.RemoveAt(0);
+                int rngindex = Random.Range(0, Subjects.Count);
+                currentSubject = Subjects[rngindex];
+                Subjects.RemoveAt(rngindex);
                 interviewState = EInterviewState.SubjectEntry;
                 onInterviewProgression?.Invoke(currentSubject, interviewState);
             }
@@ -106,5 +111,11 @@ public class Interview : MonoBehaviour
             interviewState = EInterviewState.ExecutingSentence;
             onInterviewProgression?.Invoke(currentSubject, interviewState);
         }
+    }
+
+    void PlayFireParticles()
+    {
+        ParticleSystem ps = sentenceFireParticles.GetComponent<ParticleSystem>();
+        
     }
 }

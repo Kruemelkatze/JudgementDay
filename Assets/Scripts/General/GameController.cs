@@ -11,7 +11,7 @@ public enum PlayerRequests
     Sentence
 }
 
-public delegate void PlayerRequestDelegate(PlayerRequests request);
+public delegate void PlayerRequestDelegate(PlayerRequests request, int value);
 public delegate void VoidDelegate();
 public class GameController : Singleton<GameController>
 {
@@ -64,15 +64,27 @@ public class GameController : Singleton<GameController>
             switch(interviewState)
             {
                 case EInterviewState.NoSubject:
-                    onPlayerRequest?.Invoke(PlayerRequests.NextSubject);
+                    RequestNextSubject();
                     break;
                 case EInterviewState.AwaitingSentenceInput:
-                    onPlayerRequest?.Invoke(PlayerRequests.Sentence);
+                    ChooseSentence(0);
                     break;
             }
         }
     }
 
+    public void ChooseSentence(int value)
+    {
+        if(interviewState == EInterviewState.AwaitingSentenceInput)
+        {
+            onPlayerRequest?.Invoke(PlayerRequests.Sentence, value);
+        }
+    }
+
+    public void RequestNextSubject()
+    {
+        onPlayerRequest?.Invoke(PlayerRequests.NextSubject, 0);
+    }
     //  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ PUBLIC  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void PauseGame() => SetPause(true);
     public void ContinueGame() => SetPause(false);
