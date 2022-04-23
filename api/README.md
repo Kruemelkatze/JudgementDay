@@ -24,3 +24,8 @@ https://judgementdayapi.vercel.app/api/stats
 ```bash
 curl -d '{"user": "me", "name": "person1", "score": 1}' -H 'Content-Type: application/json' -X POST https://judgementdayapi.vercel.app/api/addStat
 ```
+
+### clear all data
+```bash
+curl -d '{"password": "THE_PASSWORD"}' -H 'Content-Type: application/json' -X POST https://judgementdayapi.vercel.app/api/clear
+```

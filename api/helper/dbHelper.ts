@@ -27,8 +27,16 @@ export const createStat = async (name: String, user: String, score: Number) => {
     });
 }
 
+export const clear = async () => {
+    const models = await getModels();
+    const Stats = models['stats'];
+    
+    await Stats.remove({});
+}
+
 
 module.exports = {
     getAllStats,
-    createStat
+    createStat,
+    clear
 }
