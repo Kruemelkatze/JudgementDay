@@ -18,6 +18,9 @@ namespace Cam
         [Space] [SerializeField] private float posDuration = 0.7f;
         [SerializeField] private float sizeDuration = 0.7f;
 
+        [SerializeField] private float zoomInDelay = 0.7f;
+        
+
         [Space] [SerializeField] [ReadOnlyField]
         private bool isInFocus;
 
@@ -28,18 +31,43 @@ namespace Cam
             Hub.Register(this);
         }
 
-        private void SetFocus(bool focus)
+        private void Start()
         {
-            if (isTransitioning || focus == isInFocus)
-                return;
-
-            StartCoroutine(SetFocusCoroutine(focus));
+            var inter = Hub.Get<Interview>();
+            inter.onInterviewProgression += OnInterviewProgressed;
         }
 
-        private IEnumerator SetFocusCoroutine(bool focus)
+
+        private void OnInterviewProgressed(SubjectInformation currentsubject, EInterviewState interviewstate)
+        {
+            switch (interviewstate)
+            {
+                case EInterviewState.AwaitingSentenceInput:
+                    SetFocus(true, zoomInDelay);
+                    break;
+                default:
+                    SetFocus(false);
+                    break;
+            }
+        }
+
+        private void SetFocus(bool focus, float delay = 0)
+        {
+            if (focus == isInFocus)
+                return;
+
+            StartCoroutine(SetFocusCoroutine(focus, delay));
+        }
+
+        private IEnumerator SetFocusCoroutine(bool focus, float delay = 0)
         {
             isTransitioning = true;
             isInFocus = focus;
+
+            if (delay > 0)
+            {
+                yield return new WaitForSeconds(delay);
+            }
 
             var targetPos = (Vector3) (focus ? focusPosition : initialPosition);
             targetPos.z = -10;
