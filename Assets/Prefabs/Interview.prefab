@@ -47,10 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Subjects:
-  - {fileID: 11400000, guid: 2ee3ec92fcc5b7843a90209b7892ef1c, type: 2}
-  - {fileID: 11400000, guid: 2ee3ec92fcc5b7843a90209b7892ef1c, type: 2}
-  - {fileID: 11400000, guid: 2ee3ec92fcc5b7843a90209b7892ef1c, type: 2}
-  - {fileID: 11400000, guid: 2ee3ec92fcc5b7843a90209b7892ef1c, type: 2}
+  - {fileID: 11400000, guid: c488e56e9f9bfd24ea33e3aee4dcfd90, type: 2}
   - {fileID: 11400000, guid: 2ee3ec92fcc5b7843a90209b7892ef1c, type: 2}
   currentSubject: {fileID: 0}
   interviewState: 0
