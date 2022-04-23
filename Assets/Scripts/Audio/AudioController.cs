@@ -11,7 +11,7 @@ public class AudioController : PersistentSingleton<AudioController>
 {
     private const float MaxVolume = 1;
     [SerializeField] private StringAudioDictionary soundClips = new StringAudioDictionary();
-    [SerializeField] private StringAudioDictionary musicClips = new StringAudioDictionary();
+    [SerializeField] public StringAudioDictionary musicClips = new StringAudioDictionary();
 
     [SerializeField] [Range(0, MaxVolume)] private float musicVolume = MaxVolume / 2;
     [SerializeField] [Range(0, MaxVolume)] private float soundVolume = MaxVolume / 2;

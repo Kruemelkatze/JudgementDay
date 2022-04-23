@@ -39,7 +39,7 @@ public class GameController : Singleton<GameController>
 
     private void Start()
     {
-        AudioController.Instance.PlayDefaultMusic();
+        //AudioController.Instance.PlayDefaultMusic();
 
         gameState = GameState.Starting;
 
