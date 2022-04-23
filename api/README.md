@@ -15,7 +15,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Api paths
 
 ### get list of all stats data
-https://judgementdayapi.vercel.app/api/stats
+https://judgementdayapi.vercel.app/api/list
 
 ### get all stats
 https://judgementdayapi.vercel.app/api/stats
