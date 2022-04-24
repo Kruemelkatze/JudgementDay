@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Subjects:
+  - {fileID: 11400000, guid: 32f4c13172be94945a90ee4aaa8ca9f7, type: 2}
   - {fileID: 11400000, guid: f5f9b7eb5acc65f4b825115dbb5e5475, type: 2}
   - {fileID: 11400000, guid: 2f5e45ca30784914e896f8d8846d2a72, type: 2}
   - {fileID: 11400000, guid: cb99c940c4f46424294fb625b901921b, type: 2}
@@ -53,6 +54,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ea04882ac72cab04cb982ec84ebdf78c, type: 2}
   - {fileID: 11400000, guid: d9acb91c88f44dd4e847b911df81fbb7, type: 2}
   - {fileID: 11400000, guid: d772b0be06b025441bc1d66b19f8d762, type: 2}
+  - {fileID: 11400000, guid: 5df6560dad7589b4e9e6b69cb9b35d52, type: 2}
   - {fileID: 11400000, guid: a593bc0e6bf8e3a4fa73f71692e873c1, type: 2}
   currentSubject: {fileID: 0}
   interviewState: 0

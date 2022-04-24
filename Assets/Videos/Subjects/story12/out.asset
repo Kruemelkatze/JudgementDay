@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: out
   m_EditorClassIdentifier: 
   clipType: 3
-  videoClipURL: story10/out.mp4
+  videoClipURL: story12/out.mp4
   shouldLoop: 0
   keyFrameData: []

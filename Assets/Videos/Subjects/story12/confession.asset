@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: confession
   m_EditorClassIdentifier: 
   clipType: 1
-  videoClipURL: story10/confession.mp4
+  videoClipURL: story12/confession.mp4
   shouldLoop: 0
   keyFrameData: []
