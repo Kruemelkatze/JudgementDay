@@ -60,7 +60,7 @@ Material:
     - SCROLL_STATIC: 0
     - STATIC: 1
     - Vector1_1BFF6B46: 4.26
-    - Vector1_5660967D: 2
+    - Vector1_5660967D: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BlendOp: 0
@@ -74,7 +74,7 @@ Material:
     - _QueueOffset: 0
     - _SampleGI: 0
     - _ScanlineHeight: 10
-    - _ScanlineStrength: 0.5
+    - _ScanlineStrength: 0.2
     - _SrcBlend: 1
     - _StaticStrength: 0.15
     - _Stencil: 0
@@ -87,7 +87,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _CRTWarpStrength: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _CRTWarpStrength: {r: 0.32, g: 0.5, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
