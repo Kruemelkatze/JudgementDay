@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: idle
   m_EditorClassIdentifier: 
   clipType: 2
-  videoClipURL: story10/idle.mp4
+  videoClipURL: story12/idle.mp4
   shouldLoop: 0
   keyFrameData: []
