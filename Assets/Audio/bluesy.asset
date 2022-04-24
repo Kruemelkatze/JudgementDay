@@ -16,7 +16,7 @@ MonoBehaviour:
   audioClips: []
   subtitle: 
   loop: 0
-  volume: 0.7
+  volume: 0.25
   pitch: 1
   volumeVariation: 0
   pitchVariation: 0

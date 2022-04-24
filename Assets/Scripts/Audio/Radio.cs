@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using Videos;
 using Random = UnityEngine.Random;
 
 namespace General
@@ -48,13 +49,25 @@ namespace General
         private IEnumerator PlaySongCoroutine(int index, bool immediate)
         {
             if (!immediate)
+            {
+                var vidc = Hub.Get<TableVideoController>();
+                if (vidc)
+                {
+                    vidc.SetRadioVideo();
+                }
+
                 yield return new WaitForSeconds(switchDelay);
+            }
 
             currentIndex = index;
 
             var song = songs[index];
             AudioController.Instance.PlayMusic(song);
-            AudioController.Instance.PlaySound(radioKnobSound);
+
+            if (!immediate)
+            {
+                AudioController.Instance.PlaySound(radioKnobSound);
+            }
 
             _switchCo = null;
         }
