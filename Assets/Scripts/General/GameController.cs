@@ -64,10 +64,10 @@ public class GameController : Singleton<GameController>
             switch(interviewState)
             {
                 case EInterviewState.NoSubject:
-                    RequestNextSubject();
+                    //RequestNextSubject();
                     break;
                 case EInterviewState.AwaitingSentenceInput:
-                    ChooseSentence(0);
+                    //ChooseSentence(0);
                     break;
                 case EInterviewState.Confession:
                     Hub.Get<VideoBackground>().videoPlayer.playbackSpeed = 10.0f;
