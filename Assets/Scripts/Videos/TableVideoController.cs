@@ -23,7 +23,9 @@ namespace Videos
 
         private void Start()
         {
-            Hub.Get<Interview>().onInterviewProgression += OnInterviewProgressed;
+            var interview = Hub.Get<Interview>();
+            if (interview)
+                interview.onInterviewProgression += OnInterviewProgressed;
         }
 
         private void OnInterviewProgressed(SubjectInformation currentsubject, EInterviewState interviewstate)
@@ -31,8 +33,7 @@ namespace Videos
             if (interviewstate == EInterviewState.ExecutingSentence)
             {
                 SetBellVideo();
-
-            } 
+            }
         }
 
         public void SetBellVideo()

@@ -12,6 +12,8 @@ namespace General
         [SerializeField] private string radioKnobSound = "radioknob";
         [SerializeField] private float switchDelay = 0.7f;
 
+        [SerializeField] private bool playFixedMusic;
+        
 
         private int currentIndex;
 
@@ -21,8 +23,16 @@ namespace General
         private void Start()
         {
             songs = AudioController.Instance.musicClips.Keys.ToArray();
-            var index = (int) (Random.value * songs.Length);
-            PlaySong(index, true);
+
+            if (playFixedMusic)
+            {
+                AudioController.Instance.PlayDefaultMusic();
+            }
+            else
+            {
+                var index = (int) (Random.value * songs.Length);
+                PlaySong(index, true);
+            }
         }
 
         public void NextSong()

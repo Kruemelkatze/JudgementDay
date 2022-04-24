@@ -19,7 +19,7 @@ namespace Cam
         [SerializeField] private float sizeDuration = 0.7f;
 
         [SerializeField] private float zoomInDelay = 0.7f;
-        
+
 
         [Space] [SerializeField] [ReadOnlyField]
         private bool isInFocus;
@@ -34,7 +34,8 @@ namespace Cam
         private void Start()
         {
             var inter = Hub.Get<Interview>();
-            inter.onInterviewProgression += OnInterviewProgressed;
+            if (inter)
+                inter.onInterviewProgression += OnInterviewProgressed;
         }
 
 
@@ -51,7 +52,7 @@ namespace Cam
             }
         }
 
-        private void SetFocus(bool focus, float delay = 0)
+        public void SetFocus(bool focus, float delay = 0)
         {
             if (focus == isInFocus)
                 return;
