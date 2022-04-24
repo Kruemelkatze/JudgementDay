@@ -57,6 +57,7 @@ public class VideoBackground : MonoBehaviour
                 PlayAwaitSentence();
                 break;
             case EInterviewState.NoSubject:
+            case EInterviewState.InterviewDone:
                 PlayNoSubject();
                 break;
             case EInterviewState.Confession:

@@ -12,19 +12,36 @@ public enum EInterviewState
     SubjectEntry,
     Confession,
     AwaitingSentenceInput,
-    ExecutingSentence
+    ExecutingSentence,
+    InterviewDone
+}
+
+[System.Serializable]
+public struct SubjectResult
+{
+    public SubjectResult(SubjectInformation info, int sentence)
+    {
+        subjectInformation = info;
+        sentenceValue = sentence;
+    }
+    public SubjectInformation subjectInformation;
+    public int sentenceValue;
 }
 
 public delegate void OnInterviewProgressionDelegate(SubjectInformation currentSubject, EInterviewState interviewState);
+public delegate void OnInterviewFinished(List<SubjectResult> results); 
 public class Interview : MonoBehaviour
 {
     public OnInterviewProgressionDelegate onInterviewProgression;
+    public OnInterviewFinished onIntervieFinished;
     public List<SubjectInformation> Subjects = new List<SubjectInformation>();
     public SubjectInformation currentSubject = null;
     // Start is called before the first frame update
 
     public EInterviewState interviewState = EInterviewState.Setup;
     public int numSubjectsToJudge = 5;
+
+    public List<SubjectResult> results = new List<SubjectResult>();
 
     private void Awake()
     {
@@ -57,7 +74,7 @@ public class Interview : MonoBehaviour
                 SubjectInterviewClipCompleted();
                 break;
             case ESubjectClipType.AwaitSentencing:
-                SubjectIdleClipCompleted();
+                //nothing really, we wait for player to input something
                 break;
             case ESubjectClipType.Sentenced:
                 SubjectSentencedClipCompleted();
@@ -67,14 +84,14 @@ public class Interview : MonoBehaviour
 
     private void SubjectSentencedClipCompleted()
     {
-        interviewState = EInterviewState.NoSubject;
+        interviewState = Subjects.Count > 0 ? EInterviewState.NoSubject : EInterviewState.InterviewDone;        
         currentSubject = null;
         onInterviewProgression?.Invoke(currentSubject, interviewState);
-    }
 
-    private void SubjectIdleClipCompleted()
-    {
-        //nothing really, we wait for player to input something
+        if(interviewState == EInterviewState.InterviewDone)
+        {
+            onIntervieFinished?.Invoke(results);
+        }
     }
 
     private void SubjectInterviewClipCompleted()
@@ -108,6 +125,8 @@ public class Interview : MonoBehaviour
             Debug.Assert(currentSubject != null);
             Debug.Assert(interviewState == EInterviewState.AwaitingSentenceInput);
             interviewState = EInterviewState.ExecutingSentence;
+
+            results.Add(new SubjectResult(currentSubject, value ));
             onInterviewProgression?.Invoke(currentSubject, interviewState);
         }
     }
