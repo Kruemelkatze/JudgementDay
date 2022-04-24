@@ -69,6 +69,9 @@ public class GameController : Singleton<GameController>
                 case EInterviewState.AwaitingSentenceInput:
                     ChooseSentence(0);
                     break;
+                case EInterviewState.Confession:
+                    Hub.Get<VideoBackground>().videoPlayer.playbackSpeed = 10.0f;
+                    break;
             }
         }
     }

@@ -105,6 +105,7 @@ public class VideoBackground : MonoBehaviour
 
     private void PlayAnimation(ESubjectClipType clip, bool loop)
     {
+        videoPlayer.playbackSpeed = 1.0f;
         currentClipData = currentSubject.GetClipData(clip);
         videoPlayer.isLooping = loop;
         vcap.SetVideoURL(currentClipData.videoClipURL);
@@ -144,6 +145,7 @@ public class VideoBackground : MonoBehaviour
 
     IEnumerator PlayParticlesAfterDelay(float delay, ParticleSystem ps)
     {
+        ps.main.duration = videoPlayer.length;
         yield return new WaitForSeconds(delay);
         ps.Play();
     }
