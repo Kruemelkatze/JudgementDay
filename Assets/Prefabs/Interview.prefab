@@ -46,8 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Subjects:
-  - {fileID: 11400000, guid: c488e56e9f9bfd24ea33e3aee4dcfd90, type: 2}
-  - {fileID: 11400000, guid: 2ee3ec92fcc5b7843a90209b7892ef1c, type: 2}
+  - {fileID: 11400000, guid: f5f9b7eb5acc65f4b825115dbb5e5475, type: 2}
+  - {fileID: 11400000, guid: 2f5e45ca30784914e896f8d8846d2a72, type: 2}
+  - {fileID: 11400000, guid: cb99c940c4f46424294fb625b901921b, type: 2}
+  - {fileID: 11400000, guid: 0822c23098670184b8d1295d11b55876, type: 2}
+  - {fileID: 11400000, guid: ea04882ac72cab04cb982ec84ebdf78c, type: 2}
+  - {fileID: 11400000, guid: d9acb91c88f44dd4e847b911df81fbb7, type: 2}
+  - {fileID: 11400000, guid: d772b0be06b025441bc1d66b19f8d762, type: 2}
+  - {fileID: 11400000, guid: a593bc0e6bf8e3a4fa73f71692e873c1, type: 2}
   currentSubject: {fileID: 0}
   interviewState: 0
   numSubjectsToJudge: 5

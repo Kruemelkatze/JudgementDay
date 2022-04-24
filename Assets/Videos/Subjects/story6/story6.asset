@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56032881aefc8f4488a09a096baa69f0, type: 3}
+  m_Name: story6
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 218f9d9fa2ffc844684e4dbe3eca3deb, type: 3}
+  subjectName: Pippo
+  deathDate: 19.08.2012
+  country: Italy
+  informationText: Every time I was drunk in the city, I stole a bike, then rode
+    it home. When I got home, I dumped the bikes in a small river nearby so that
+    no one could find them.
+  shortVersion: Stole bikes while drunk and dumped them in the river
+  realSentence: Theft, max 6 months
+  entry: {fileID: 11400000, guid: dc345397e12f6c041a84207074946794, type: 2}
+  confession: {fileID: 11400000, guid: 2498facec16ae3f419d3587d3b811435, type: 2}
+  awaitingSentence: {fileID: 11400000, guid: 52c28024ba99bf54e9bee4f4ea6030de, type: 2}
+  sentenced: {fileID: 11400000, guid: 55950e6d3825a9e45b255cb42858d0ed, type: 2}

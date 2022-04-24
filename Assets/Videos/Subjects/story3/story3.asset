@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56032881aefc8f4488a09a096baa69f0, type: 3}
+  m_Name: story3
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 637e79496e6363e4cbc53d572cbd6d44, type: 3}
+  subjectName: Peter
+  deathDate: 08.11.2020
+  country: UK
+  informationText: I was young and needed money, so I dug up bodies from graves and
+    sold their parts on the dark web. I made quite a bit of money with it and was
+    able to buy an excellent house for myself and my future wife.
+  shortVersion: Sold body parts on the dark web
+  realSentence: Desecration of a grave, max 3 months
+  entry: {fileID: 11400000, guid: bea0f871010ca924f9ae8b133b8d0dd0, type: 2}
+  confession: {fileID: 11400000, guid: b030dc6dea146f642b0dea9f1a4e107e, type: 2}
+  awaitingSentence: {fileID: 11400000, guid: b58b73158990119438746c78d907b27a, type: 2}
+  sentenced: {fileID: 11400000, guid: bb4d93bed21b22b4b943309611743a36, type: 2}
