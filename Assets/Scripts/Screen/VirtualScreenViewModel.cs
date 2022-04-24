@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using General;
 using TMPro;
@@ -118,8 +119,14 @@ public class VirtualScreenViewModel : MonoBehaviour
                 PunishmentSuccessfulScreen.SetActive(false);
                 AllPunishmentSuccessfulScreen.SetActive(true);
                 JudgementSuccessfulButton.interactable = true;
-                SceneManager.LoadScene("MainMenu");
+                StartCoroutine("startNewGame");
                 break;
         }
     }
+
+    private IEnumerator startNewGame()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("2DScene");
+    } 
 }
