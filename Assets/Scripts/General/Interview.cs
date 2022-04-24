@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public enum EInterviewState
 {
+    Setup,
     NoSubject,
     SubjectEntry,
     Confession,
@@ -22,11 +23,8 @@ public class Interview : MonoBehaviour
     public SubjectInformation currentSubject = null;
     // Start is called before the first frame update
 
-    public EInterviewState interviewState = EInterviewState.NoSubject;
+    public EInterviewState interviewState = EInterviewState.Setup;
     public int numSubjectsToJudge = 5;
-
-    public GameObject entrySmokeParticles;
-    public GameObject sentenceFireParticles;
 
     private void Awake()
     {
@@ -44,7 +42,8 @@ public class Interview : MonoBehaviour
     IEnumerator StartGameAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        NotifyPlayerRequest(PlayerRequests.NextSubject, 0);
+        interviewState = EInterviewState.NoSubject;
+        onInterviewProgression?.Invoke(null, interviewState);
     }
 
     private void NotifySubjectClipCompleted(SubjectClipData clip, bool isLoopingClip)
@@ -111,11 +110,5 @@ public class Interview : MonoBehaviour
             interviewState = EInterviewState.ExecutingSentence;
             onInterviewProgression?.Invoke(currentSubject, interviewState);
         }
-    }
-
-    void PlayFireParticles()
-    {
-        ParticleSystem ps = sentenceFireParticles.GetComponent<ParticleSystem>();
-        
     }
 }
