@@ -5,13 +5,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
- 
+using UnityEngine.SceneManagement;
+
 public class VirtualScreenViewModel : MonoBehaviour
 {
     public GameObject BootupScreen;
     public GameObject PersonScreen;
     public GameObject PenaltyScreen;
     public GameObject PunishmentSuccessfulScreen;
+    public GameObject AllPunishmentSuccessfulScreen;
 
     public TextMeshProUGUI SubjectName;
     public TextMeshProUGUI SubjectCountry;
@@ -34,6 +36,7 @@ public class VirtualScreenViewModel : MonoBehaviour
         PersonScreen.SetActive(false);
         PenaltyScreen.SetActive(false);
         PunishmentSuccessfulScreen.SetActive(false);
+        AllPunishmentSuccessfulScreen.SetActive(false);
         JudgeNowButton.interactable = false;
         Hub.Get<Interview>().onInterviewProgression += NotifyInterviewProgression;
         Hub.Get<Interview>().onIntervieFinished += NotifyInterviewFinished;
@@ -42,6 +45,7 @@ public class VirtualScreenViewModel : MonoBehaviour
     private void NotifyInterviewFinished(List<SubjectResult> results)
     {
         // score screen
+        
     }
 
     public void StartJudging()
@@ -106,6 +110,15 @@ public class VirtualScreenViewModel : MonoBehaviour
                 SubjectDeathDate.SetText("Death: " + currentsubject.deathDate);
                 SubjectDescription.SetText(currentsubject.informationText);
                 SubjectImage.sprite = currentsubject.sprite;
+                break;
+            case EInterviewState.InterviewDone:
+                BootupScreen.SetActive(false);
+                PersonScreen.SetActive(false);
+                PenaltyScreen.SetActive(false);
+                PunishmentSuccessfulScreen.SetActive(false);
+                AllPunishmentSuccessfulScreen.SetActive(true);
+                JudgementSuccessfulButton.interactable = true;
+                SceneManager.LoadScene("MainMenu");
                 break;
         }
     }
