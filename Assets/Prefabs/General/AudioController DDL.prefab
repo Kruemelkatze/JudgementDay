@@ -56,10 +56,12 @@ MonoBehaviour:
     - devilmaycare
     - bluesy
     - heavenly
+    - gothictechno
     m_values:
     - {fileID: 11400000, guid: 17b1443283e4ff54eb08bd33f8d7c29c, type: 2}
     - {fileID: 11400000, guid: 6d77d66634752504eb8b10e2f262a9ff, type: 2}
     - {fileID: 11400000, guid: eb4f934f49bf7404e9073120c9163516, type: 2}
+    - {fileID: 11400000, guid: 05468d24dffdd6f429de319bf7e02cf6, type: 2}
   musicVolume: 0.5
   soundVolume: 0.5
   defaultMusic: devilmaycare
