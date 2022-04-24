@@ -30,12 +30,9 @@ namespace Videos
         {
             if (interviewstate == EInterviewState.ExecutingSentence)
             {
-                _init = true;
-                return;
-            } else if (_init && interviewstate == EInterviewState.NoSubject)
-            {
                 SetBellVideo();
-            }
+
+            } 
         }
 
         public void SetBellVideo()
