@@ -7,6 +7,11 @@ using UnityEngine.Video;
 [CreateAssetMenu(fileName = "SubjectInformation", menuName ="GameData/SubjectInformation")]
 public class SubjectInformation : ScriptableObject
 {
+    public Sprite sprite = null;
+    public string subjectName = "<unknown>";
+    public string country = "<unknown";
+    [TextArea(7, 10)]
+    public string informationText = "<no information>";
     public SubjectClipData entry;
     public SubjectClipData confession;
     public SubjectClipData awaitingSentence;
