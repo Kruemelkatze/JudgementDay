@@ -9,9 +9,14 @@ public class SubjectInformation : ScriptableObject
 {
     public Sprite sprite = null;
     public string subjectName = "<unknown>";
-    public string country = "<unknown";
+    public string deathDate = "DD-MM-YYYY";
+    public string country = "<unknown>";
     [TextArea(7, 10)]
     public string informationText = "<no information>";
+    [TextArea(2, 10)]
+    public string shortVersion = "<no information>";
+    [TextArea(2, 10)]
+    public string realSentence = "<no information>";
     public SubjectClipData entry;
     public SubjectClipData confession;
     public SubjectClipData awaitingSentence;
