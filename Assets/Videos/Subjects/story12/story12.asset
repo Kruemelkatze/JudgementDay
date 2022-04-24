@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 876500c871123ae4d98559af5d0f9134, type: 3}
   subjectName: Jakub
-  deathDate: DD-MM-YYYY
+  deathDate: 29.02.2003
   country: Poland
   informationText: My brother and I were surfing when a storm came up, and I lost
     my surfboard in the waves. In order not to drown I took his board away from him,

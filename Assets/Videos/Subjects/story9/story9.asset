@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: story9
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 6e40979d9311bee48ab66c4eaa25ec3c, type: 3}
-  subjectName: Croatia
+  subjectName: Iva
   deathDate: 16.04.2009
-  country: Iva
+  country: Croatia
   informationText: I was a nurse who picked up medicine from the hospital and then
     sold it over the internet.
   shortVersion: Stole medicine and sold it
