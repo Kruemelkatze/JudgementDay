@@ -5782,7 +5782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3673376650734972898
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6392,7 +6392,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5838148143989413519}
         m_TargetAssemblyTypeName: VirtualScreenViewModel, Assembly-CSharp
-        m_MethodName: StartJudging
+        m_MethodName: GoToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

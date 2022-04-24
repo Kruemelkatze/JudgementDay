@@ -60,6 +60,11 @@ public class VirtualScreenViewModel : MonoBehaviour
         PunishmentSuccessfulScreen.SetActive(false);
     }
 
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void GoToJudgeScreen()
     {
         PersonScreen.SetActive(false);
@@ -119,14 +124,8 @@ public class VirtualScreenViewModel : MonoBehaviour
                 PunishmentSuccessfulScreen.SetActive(false);
                 AllPunishmentSuccessfulScreen.SetActive(true);
                 JudgementSuccessfulButton.interactable = true;
-                StartCoroutine("startNewGame");
                 break;
         }
     }
 
-    private IEnumerator startNewGame()
-    {
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("2DScene");
-    } 
 }
