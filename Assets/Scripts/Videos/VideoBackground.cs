@@ -145,6 +145,8 @@ public class VideoBackground : MonoBehaviour
 
     IEnumerator PlayParticlesAfterDelay(float delay, ParticleSystem ps)
     {
+        ps.Stop();
+        //ps.main.duration = videoPlayer.length;
         yield return new WaitForSeconds(delay);
         ps.Play();
     }
