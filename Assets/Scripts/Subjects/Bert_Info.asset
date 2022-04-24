@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56032881aefc8f4488a09a096baa69f0, type: 3}
   m_Name: Bert_Info
   m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  subjectName: <unknown>
+  country: <unknown
+  informationText: 
   entry: {fileID: 11400000, guid: 7c1f8f6d61b97bd48ae9307fb4d1173c, type: 2}
   confession: {fileID: 11400000, guid: 61b0e1b72795e2c4586accd7d24ab101, type: 2}
   awaitingSentence: {fileID: 11400000, guid: 6ec177cf32609884a806a9907c8b9eea, type: 2}

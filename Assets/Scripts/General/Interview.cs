@@ -1,4 +1,5 @@
 using General;
+using Scoring;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -84,7 +85,8 @@ public class Interview : MonoBehaviour
 
     private void SubjectSentencedClipCompleted()
     {
-        interviewState = Subjects.Count > 0 ? EInterviewState.NoSubject : EInterviewState.InterviewDone;        
+        numSubjectsToJudge--;
+        interviewState = numSubjectsToJudge > 0 ? EInterviewState.NoSubject : EInterviewState.InterviewDone;        
         currentSubject = null;
         onInterviewProgression?.Invoke(currentSubject, interviewState);
 
@@ -111,14 +113,14 @@ public class Interview : MonoBehaviour
         {
             Debug.Assert(currentSubject == null);
             Debug.Assert(interviewState == EInterviewState.NoSubject);
-            if (Subjects.Count > 0)
-            {
-                int rngindex = Random.Range(0, Subjects.Count);
-                currentSubject = Subjects[rngindex];
-                Subjects.RemoveAt(rngindex);
-                interviewState = EInterviewState.SubjectEntry;
-                onInterviewProgression?.Invoke(currentSubject, interviewState);
-            }
+            Debug.Assert(numSubjectsToJudge > 0);
+            Debug.Assert(Subjects.Count > 0);
+
+            int rngindex = Random.Range(0, Subjects.Count);
+            currentSubject = Subjects[rngindex];
+            Subjects.RemoveAt(rngindex);
+            interviewState = EInterviewState.SubjectEntry;
+            onInterviewProgression?.Invoke(currentSubject, interviewState);
         }
         else if(request == PlayerRequests.Sentence)
         {
@@ -127,6 +129,9 @@ public class Interview : MonoBehaviour
             interviewState = EInterviewState.ExecutingSentence;
 
             results.Add(new SubjectResult(currentSubject, value ));
+
+            Hub.Get<ScoringController>().PostScore(currentSubject.subjectName, value);
+
             onInterviewProgression?.Invoke(currentSubject, interviewState);
         }
     }
