@@ -1682,14 +1682,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 811374471, guid: 841eba17df3178d48aeda894dc0ad57d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1090349382, guid: 841eba17df3178d48aeda894dc0ad57d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2006439833441725701, guid: 841eba17df3178d48aeda894dc0ad57d, type: 3}
       propertyPath: screenCamera
       value: 
