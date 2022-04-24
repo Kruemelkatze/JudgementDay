@@ -710,7 +710,7 @@ PrefabInstance:
       propertyPath: m_text
       value: "Fabian Schober\r\nDaniela Meinhardt\r\nAndreas Leibetseder\r\nStephanie
         K\xFChnl\r\nDaniela Stefanics\r\nStefan Hohnwald\r\nChristof Karisch\r\nAlexander
-        Kopper"
+        Kopper\nReza Ebrahimi\r\n\r\n+ Sinners"
       objectReference: {fileID: 0}
     - target: {fileID: 6329144305910386691, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
       propertyPath: m_fontAsset
@@ -1258,7 +1258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6329144307734783727, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 575.02
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329144307734783727, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -95.86
       objectReference: {fileID: 0}
     - target: {fileID: 6329144307757827250, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
       propertyPath: m_fontAsset
