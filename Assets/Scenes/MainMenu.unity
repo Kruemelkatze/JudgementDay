@@ -710,12 +710,20 @@ PrefabInstance:
       propertyPath: m_text
       value: "Fabian Schober\r\nDaniela Meinhardt\r\nAndreas Leibetseder\r\nStephanie
         K\xFChnl\r\nDaniela Stefanics\r\nStefan Hohnwald\r\nChristof Karisch\r\nAlexander
-        Kopper\nReza Ebrahimi\r\n\r\n+ Sinners"
+        Kopper\nPeter Hafele\nReza Ebrahimi\r\n\r\n+ Sinners"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329144305910386691, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
+      propertyPath: m_fontSize
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 6329144305910386691, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: d7d454bbd209442bcaba00b4b12b313b, type: 2}
+    - target: {fileID: 6329144305910386691, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 6329144305910386691, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
       propertyPath: m_textAlignment
       value: 65535
@@ -764,6 +772,26 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: d9cc6987c6642446cb9326b11a01bbc9, type: 3}
+    - target: {fileID: 6329144306013679026, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329144306013679026, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329144306013679026, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329144306013679027, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329144306013679027, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6329144306081448404, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1158,7 +1186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6329144307539734968, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6329144307584016376, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
       propertyPath: m_Type
