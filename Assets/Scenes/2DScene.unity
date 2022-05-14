@@ -2676,41 +2676,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 352556860}
     m_Modifications:
-    - target: {fileID: 6424184023067613694, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: AudioController, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 6424184023185537702, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1880168268}
-    - target: {fileID: 6424184023185537702, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: PlaySoundFromUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184023185537702, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: AudioController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184023824922915, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184023824922915, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184023824922915, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.21
-      objectReference: {fileID: 0}
     - target: {fileID: 6424184023996284785, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
       propertyPath: m_Name
       value: PauseCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184023996284785, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6424184023996284798, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
       propertyPath: m_Pivot.x
@@ -2795,42 +2767,6 @@ PrefabInstance:
     - target: {fileID: 6424184023996284798, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184024188815819, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184024188815819, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184024264683241, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184024264683241, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184024264683241, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184024554224460, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184024554224460, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184024864217500, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: PlaySoundFromUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6424184024864217500, guid: a60007b992704b848afb90e7beb72c9a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: AudioController, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a60007b992704b848afb90e7beb72c9a, type: 3}

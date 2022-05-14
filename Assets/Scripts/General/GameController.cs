@@ -4,6 +4,9 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using General;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Video;
 
 public enum PlayerRequests
 {
@@ -20,6 +23,7 @@ public delegate void VoidDelegate();
 
 public class GameController : Singleton<GameController>
 {
+    public event Action<bool> onPaused;
     public PlayerRequestDelegate onPlayerRequest;
     [SerializeField] private GameState gameState;
 
@@ -31,6 +35,7 @@ public class GameController : Singleton<GameController>
     private GameState _prePauseState = GameState.Starting;
 
     public EInterviewState interviewState = EInterviewState.Setup;
+    private List<VideoPlayer> _pausedVideos = new();
 
 
     private void Awake()
@@ -157,6 +162,23 @@ public class GameController : Singleton<GameController>
 
         // Whatever else there is to do...
         // Deactivate other UI, etc.
+        if (paused)
+        {
+            _pausedVideos = FindObjectsOfType<VideoPlayer>().Where(vp => vp.isPlaying).ToList();
+            foreach (var video in _pausedVideos)
+            {
+                video.Pause();
+            }
+        }
+        else
+        {
+            foreach (var video in _pausedVideos)
+            {
+                video.Play();
+            }
+        }
+
+        onPaused?.Invoke(paused);
     }
 
 #if UNITY_EDITOR

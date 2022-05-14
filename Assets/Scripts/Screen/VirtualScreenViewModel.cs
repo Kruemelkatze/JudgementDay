@@ -53,9 +53,15 @@ public class VirtualScreenViewModel : MonoBehaviour
     {
         ShowScreen(BootupScreen);
         JudgeNowButton.interactable = false;
+        Hub.Get<GameController>().onPaused += OnPaused;
         Hub.Get<Interview>().onInterviewProgression += NotifyInterviewProgression;
         Hub.Get<Interview>().onReviewProgression += NotifyReviewProgression;
         Hub.Get<Interview>().onInterviewFinished += NotifyInterviewFinished;
+    }
+
+    private void OnPaused(bool paused)
+    {
+        GetComponent<Canvas>().enabled = !paused;
     }
 
     private void NotifyInterviewFinished(List<SubjectResult> results)
