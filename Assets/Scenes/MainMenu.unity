@@ -968,6 +968,10 @@ PrefabInstance:
       value: MainMenuCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 6329144306197150555, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
+      propertyPath: music
+      value: devilmaycare
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329144306197150555, guid: 891c31f365dc8fa42b2d5591801277b3, type: 3}
       propertyPath: menusAndButtons.Array.size
       value: 3
       objectReference: {fileID: 0}
