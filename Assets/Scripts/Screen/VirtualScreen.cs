@@ -1,15 +1,20 @@
+using System;
 using System.Collections.Generic;
 using General;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
- 
+
 public class VirtualScreen : GraphicRaycaster
 {
     public Camera screenCamera; // Reference to the camera responsible for rendering the virtual screen's rendertexture
- 
-    public GraphicRaycaster screenCaster; // Reference to the GraphicRaycaster of the canvas displayed on the virtual screen
- 
+
+    public GraphicRaycaster
+        screenCaster; // Reference to the GraphicRaycaster of the canvas displayed on the virtual screen
+
+    private Vector3? _lastEventClickPos;
+    private Vector3? _lastVirtualClickPos;
+
     // Called by Unity when a Raycaster should raycast because it extends BaseRaycaster.
     public override void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList)
     {
@@ -17,15 +22,25 @@ public class VirtualScreen : GraphicRaycaster
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
+            _lastEventClickPos = hit.point;
+
             // Figure out where the pointer would be in the second camera based on texture position or RenderTexture.
             Vector3 virtualPos = new Vector3(hit.textureCoord.x, hit.textureCoord.y);
             virtualPos.x *= screenCamera.targetTexture.width;
             virtualPos.y *= screenCamera.targetTexture.height;
- 
+
             eventData.position = virtualPos;
- 
+
             screenCaster.Raycast(eventData, resultAppendList);
         }
     }
- 
+
+    private void OnDrawGizmos()
+    {
+        if (_lastEventClickPos.HasValue)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(_lastEventClickPos.Value, 0.1f);
+        }
+    }
 }

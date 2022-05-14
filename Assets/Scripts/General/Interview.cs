@@ -3,12 +3,14 @@ using Scoring;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public enum EInterviewState
 {
     Setup,
+    SelectingSubjects,
     NoSubject,
     SubjectEntry,
     Confession,
@@ -25,17 +27,23 @@ public struct SubjectResult
         subjectInformation = info;
         sentenceValue = sentence;
     }
+
     public SubjectInformation subjectInformation;
     public int sentenceValue;
 }
 
 public delegate void OnInterviewProgressionDelegate(SubjectInformation currentSubject, EInterviewState interviewState);
-public delegate void OnInterviewFinished(List<SubjectResult> results); 
+
+public delegate void OnInterviewFinished(List<SubjectResult> results);
+
 public class Interview : MonoBehaviour
 {
     public OnInterviewProgressionDelegate onInterviewProgression;
     public OnInterviewFinished onIntervieFinished;
     public List<SubjectInformation> Subjects = new List<SubjectInformation>();
+
+    public List<SubjectInformation> SubjectsToJudge = new List<SubjectInformation>();
+
     public SubjectInformation currentSubject = null;
     // Start is called before the first frame update
 
@@ -47,14 +55,22 @@ public class Interview : MonoBehaviour
     private void Awake()
     {
         numSubjectsToJudge = Math.Min(Subjects.Count, numSubjectsToJudge);
+        SelectRandomSubjects();
         Hub.Register<Interview>(this);
     }
+
     void Start()
     {
         Hub.Get<VideoBackground>().onSubjectClipCompleted += NotifySubjectClipCompleted;
         GameController player = Hub.Get<GameController>();
         player.onPlayerRequest += NotifyPlayerRequest;
         StartCoroutine(StartGameAfterDelay(1.0f));
+    }
+
+    public List<SubjectInformation> SelectRandomSubjects()
+    {
+        return SubjectsToJudge = Subjects.OrderBy(x => Guid.NewGuid()).Take(numSubjectsToJudge)
+            .OrderBy(x => Subjects.IndexOf(x)).ToList();
     }
 
     IEnumerator StartGameAfterDelay(float delay)
@@ -85,12 +101,11 @@ public class Interview : MonoBehaviour
 
     private void SubjectSentencedClipCompleted()
     {
-        numSubjectsToJudge--;
-        interviewState = numSubjectsToJudge > 0 ? EInterviewState.NoSubject : EInterviewState.InterviewDone;        
+        interviewState = SubjectsToJudge.Any() ? EInterviewState.NoSubject : EInterviewState.InterviewDone;
         currentSubject = null;
         onInterviewProgression?.Invoke(currentSubject, interviewState);
 
-        if(interviewState == EInterviewState.InterviewDone)
+        if (interviewState == EInterviewState.InterviewDone)
         {
             onIntervieFinished?.Invoke(results);
         }
@@ -107,28 +122,32 @@ public class Interview : MonoBehaviour
         interviewState = EInterviewState.Confession;
         onInterviewProgression?.Invoke(currentSubject, interviewState);
     }
+
     private void NotifyPlayerRequest(PlayerRequests request, int value)
     {
-        if(request == PlayerRequests.NextSubject)
+        if (request == PlayerRequests.NextSubject)
         {
             Debug.Assert(currentSubject == null);
             Debug.Assert(interviewState == EInterviewState.NoSubject);
             Debug.Assert(numSubjectsToJudge > 0);
-            Debug.Assert(Subjects.Count > 0);
+            Debug.Assert(SubjectsToJudge.Count > 0);
 
-            int rngindex = Random.Range(0, Subjects.Count);
-            currentSubject = Subjects[rngindex];
-            Subjects.RemoveAt(rngindex);
+            if (SubjectsToJudge.Any())
+            {
+                currentSubject = SubjectsToJudge[0];
+                SubjectsToJudge.RemoveAt(0);
+            }
+
             interviewState = EInterviewState.SubjectEntry;
             onInterviewProgression?.Invoke(currentSubject, interviewState);
         }
-        else if(request == PlayerRequests.Sentence)
+        else if (request == PlayerRequests.Sentence)
         {
             Debug.Assert(currentSubject != null);
             Debug.Assert(interviewState == EInterviewState.AwaitingSentenceInput);
             interviewState = EInterviewState.ExecutingSentence;
 
-            results.Add(new SubjectResult(currentSubject, value ));
+            results.Add(new SubjectResult(currentSubject, value));
 
             Hub.Get<ScoringController>().PostScore(currentSubject.subjectName, value);
 
