@@ -7,20 +7,25 @@ using System;
 
 public enum PlayerRequests
 {
+    Login,
     NextSubject,
-    Sentence
+    Sentence,
+    Review,
+    SkipReview,
 }
 
 public delegate void PlayerRequestDelegate(PlayerRequests request, int value);
+
 public delegate void VoidDelegate();
+
 public class GameController : Singleton<GameController>
 {
     public PlayerRequestDelegate onPlayerRequest;
     [SerializeField] private GameState gameState;
-    
+
     [Header("UI")] [SerializeField] private GameObject gameUi;
     [SerializeField] private GameObject pauseUi;
-    
+
     public GameState GameState => gameState;
 
     private GameState _prePauseState = GameState.Starting;
@@ -34,6 +39,7 @@ public class GameController : Singleton<GameController>
         {
             return;
         }
+
         Hub.Register<GameController>(this);
     }
 
@@ -59,9 +65,10 @@ public class GameController : Singleton<GameController>
         {
             SetPause(gameState != GameState.Paused);
         }
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            switch(interviewState)
+            switch (interviewState)
             {
                 case EInterviewState.NoSubject:
                     //RequestNextSubject();
@@ -78,16 +85,39 @@ public class GameController : Singleton<GameController>
 
     public void ChooseSentence(int value)
     {
-        if(interviewState == EInterviewState.AwaitingSentenceInput)
+        if (interviewState == EInterviewState.AwaitingSentenceInput)
         {
             onPlayerRequest?.Invoke(PlayerRequests.Sentence, value);
         }
     }
 
-    public void RequestNextSubject()
+    public void Login()
+    {
+        onPlayerRequest?.Invoke(PlayerRequests.Login, 0);
+    }
+
+    public void RequestSubject()
     {
         onPlayerRequest?.Invoke(PlayerRequests.NextSubject, 0);
     }
+
+    public void RequestNextReview()
+    {
+        if (interviewState == EInterviewState.ReviewAwaiting || interviewState == EInterviewState.Review)
+        {
+            onPlayerRequest?.Invoke(PlayerRequests.Review, 0);
+        }
+    }
+
+    public void RequestSkipReview()
+    {
+        if (interviewState == EInterviewState.Review)
+        {
+            onPlayerRequest?.Invoke(PlayerRequests.SkipReview, 0);
+        }
+    }
+
+
     //  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ PUBLIC  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void PauseGame() => SetPause(true);
     public void ContinueGame() => SetPause(false);

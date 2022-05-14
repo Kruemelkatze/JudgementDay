@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class VirtualScreenViewModel : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class VirtualScreenViewModel : MonoBehaviour
     public GameObject PersonScreen;
     public GameObject PenaltyScreen;
     public GameObject PunishmentSuccessfulScreen;
+    public GameObject ReviewAwaitingScreen;
+    public GameObject ReviewScreen;
     public GameObject AllPunishmentSuccessfulScreen;
 
     [Space] public TextMeshProUGUI SubjectName;
@@ -32,6 +35,15 @@ public class VirtualScreenViewModel : MonoBehaviour
 
     [Space] public GameObject subjectInfoUIPrefab;
 
+    [Space] public TextMeshProUGUI ReviewSubjectName;
+    public TextMeshProUGUI ReviewSubjectShortDescription;
+    public Image ReviewSubjectImage;
+    public Transform ReviewSubjectPlayerPunishmentContainer;
+    public Transform ReviewSubjectAveragePunishmentContainer;
+    public TextMeshProUGUI ReviewSubjectRealPenalty;
+
+    private Dictionary<SubjectInformation, SubjectResult> _results;
+
     private void Awake()
     {
         Hub.Register<VirtualScreenViewModel>(this);
@@ -39,31 +51,25 @@ public class VirtualScreenViewModel : MonoBehaviour
 
     private void Start()
     {
-        BootupScreen.SetActive(true);
-        SubjectSelectionScreen.SetActive(false);
-        PersonScreen.SetActive(false);
-        PenaltyScreen.SetActive(false);
-        PunishmentSuccessfulScreen.SetActive(false);
-        AllPunishmentSuccessfulScreen.SetActive(false);
+        ShowScreen(BootupScreen);
         JudgeNowButton.interactable = false;
         Hub.Get<Interview>().onInterviewProgression += NotifyInterviewProgression;
-        Hub.Get<Interview>().onIntervieFinished += NotifyInterviewFinished;
+        Hub.Get<Interview>().onReviewProgression += NotifyReviewProgression;
+        Hub.Get<Interview>().onInterviewFinished += NotifyInterviewFinished;
     }
 
     private void NotifyInterviewFinished(List<SubjectResult> results)
     {
         // score screen
+        _results = results.ToDictionary(s => s.subjectInformation);
     }
 
     public void Login()
     {
         FillSubjects();
 
-        BootupScreen.SetActive(false);
-        SubjectSelectionScreen.SetActive(true);
-        PersonScreen.SetActive(false);
-        PenaltyScreen.SetActive(false);
-        PunishmentSuccessfulScreen.SetActive(false);
+        ShowScreen(SubjectSelectionScreen);
+        Hub.Get<GameController>().Login();
     }
 
     private void FillSubjects()
@@ -131,12 +137,9 @@ public class VirtualScreenViewModel : MonoBehaviour
     {
         JudgementSuccessfulButton.interactable = false;
         JudgeNowButton.interactable = false;
-        Hub.Get<GameController>().RequestNextSubject();
-        SubjectSelectionScreen.SetActive(false);
-        BootupScreen.SetActive(false);
-        PersonScreen.SetActive(true);
-        PenaltyScreen.SetActive(false);
-        PunishmentSuccessfulScreen.SetActive(false);
+        Hub.Get<GameController>().RequestSubject();
+        PenaltySlider.value = Random.Range(PenaltySlider.minValue, PenaltySlider.maxValue + 1);
+        ShowScreen(PersonScreen);
     }
 
     public void GoToMainMenu()
@@ -146,29 +149,64 @@ public class VirtualScreenViewModel : MonoBehaviour
 
     public void GoToJudgeScreen()
     {
-        PersonScreen.SetActive(false);
-        PenaltyScreen.SetActive(true);
+        ShowScreen(PenaltyScreen);
     }
 
     public void JudgementGoBack()
     {
-        PersonScreen.SetActive(true);
-        PenaltyScreen.SetActive(false);
-        PenaltySlider.value = 1;
+        ShowScreen(PersonScreen);
     }
 
     public void JudgeNow()
     {
-        BootupScreen.SetActive(false);
-        PersonScreen.SetActive(false);
-        PenaltyScreen.SetActive(false);
-        PunishmentSuccessfulScreen.SetActive(true);
+        ShowScreen(PunishmentSuccessfulScreen);
         Hub.Get<GameController>().ChooseSentence((int)PenaltySlider.value);
     }
 
     private void JudgeNow(int chosenSentenceIndex)
     {
         Hub.Get<GameController>().ChooseSentence(chosenSentenceIndex);
+    }
+
+    private void ShowScreen(GameObject screen)
+    {
+        BootupScreen.SetActive(false);
+        SubjectSelectionScreen.SetActive(false);
+        PersonScreen.SetActive(false);
+        PenaltyScreen.SetActive(false);
+        PunishmentSuccessfulScreen.SetActive(false);
+        ReviewAwaitingScreen.SetActive(false);
+        ReviewScreen.SetActive(false);
+        AllPunishmentSuccessfulScreen.SetActive(false);
+
+        screen.SetActive(true);
+    }
+
+    public void NextReview()
+    {
+        Hub.Get<GameController>().RequestNextReview();
+    }
+
+    public void SkipReview()
+    {
+        Hub.Get<GameController>().RequestSkipReview();
+    }
+
+    private void NotifyReviewProgression(SubjectInformation currentsubject, EInterviewState interviewState)
+    {
+        ReviewSubjectName.text = currentsubject.subjectName;
+        ReviewSubjectShortDescription.text = currentsubject.shortVersion;
+        ReviewSubjectImage.sprite = currentsubject.sprite;
+        ReviewSubjectRealPenalty.text = currentsubject.realSentence;
+
+        if (_results.TryGetValue(currentsubject, out var result))
+        {
+            EnableNthChild(ReviewSubjectPlayerPunishmentContainer, result.sentenceValue - 1);
+            EnableNthChild(ReviewSubjectAveragePunishmentContainer,
+                (int)Mathf.Round(result.averageSentenceValue) - 1);
+        }
+
+        ShowScreen(ReviewScreen);
     }
 
     private void NotifyInterviewProgression(SubjectInformation currentsubject, EInterviewState interviewstate)
@@ -185,11 +223,12 @@ public class VirtualScreenViewModel : MonoBehaviour
                 JudgeNowButton.interactable = true;
                 break;
             case EInterviewState.ExecutingSentence:
-
+                break;
+            case EInterviewState.ReviewAwaiting:
+                ShowScreen(ReviewAwaitingScreen);
                 break;
             case EInterviewState.SubjectEntry:
-                BootupScreen.SetActive(false);
-                PersonScreen.SetActive(true);
+                ShowScreen(PersonScreen);
                 SubjectName.SetText(currentsubject.subjectName);
                 SubjectCountry.SetText("Country: " + currentsubject.country);
                 SubjectDeathDate.SetText("Death: " + currentsubject.deathDate);
@@ -197,13 +236,28 @@ public class VirtualScreenViewModel : MonoBehaviour
                 SubjectImage.sprite = currentsubject.sprite;
                 break;
             case EInterviewState.InterviewDone:
-                BootupScreen.SetActive(false);
-                PersonScreen.SetActive(false);
-                PenaltyScreen.SetActive(false);
-                PunishmentSuccessfulScreen.SetActive(false);
-                AllPunishmentSuccessfulScreen.SetActive(true);
+                ShowScreen(AllPunishmentSuccessfulScreen);
                 JudgementSuccessfulButton.interactable = true;
                 break;
+        }
+    }
+
+    private void EnableNthChild(Transform container, int child)
+    {
+        var index = Math.Clamp(child, 0, container.childCount);
+
+        foreach (Transform ct in container.transform)
+        {
+            ct.gameObject.SetActive(false);
+        }
+
+        if (container.childCount > index)
+        {
+            container.GetChild(index).gameObject.SetActive(true);
+        }
+        else if (container.childCount == 1)
+        {
+            container.GetChild(0).gameObject.SetActive(true);
         }
     }
 }

@@ -44,6 +44,8 @@ namespace Cam
             switch (interviewstate)
             {
                 case EInterviewState.AwaitingSentenceInput:
+                case EInterviewState.SelectingSubjects:
+                case EInterviewState.Review:
                     SetFocus(true, zoomInDelay);
                     break;
                 default:

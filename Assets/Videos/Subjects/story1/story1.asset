@@ -20,7 +20,8 @@ MonoBehaviour:
     she was the chosen one. All she had to do was get life insurance for $125,000,
     then kill herself so that I could take her soul with me to a new life.
   shortVersion: Convinced girl to commit suicide for life on Sirius
-  realSentence: Insurance fraud max. 6 months, participation in suicide max 5 years
+  realSentence: Insurance fraud max. 6 months, participation in assisted suicide
+    max 5 years
   entry: {fileID: 11400000, guid: 67d34c95c59879140b02fa9728a2ff2c, type: 2}
   confession: {fileID: 11400000, guid: 3edea84fc8e96e640b7a3105fa45a1b1, type: 2}
   awaitingSentence: {fileID: 11400000, guid: 1c396ef24878f624c8cad5558a52174f, type: 2}
