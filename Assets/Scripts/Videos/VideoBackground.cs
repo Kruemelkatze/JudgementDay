@@ -58,6 +58,7 @@ public class VideoBackground : MonoBehaviour
                 break;
             case EInterviewState.NoSubject:
             case EInterviewState.InterviewDone:
+            case EInterviewState.ReviewAwaiting:
             case EInterviewState.Review:
                 PlayNoSubject();
                 break;
