@@ -12,6 +12,21 @@ namespace Scoring
     {
         public static readonly string UserName = Guid.NewGuid().ToString();
 
+        // Fallback values as of 18.05.2022
+        public static Dictionary<string, float> FallbackValues => new Dictionary<string, float>
+        {
+            {"Peter", 2.833f},
+            {"Gustave", 1.6f},
+            {"AJ", 2.77f},
+            {"Anna", 2.636f},
+            {"Iva", 2.88f},
+            {"Jamé", 3.75f},
+            {"Pippo", 1.666f},
+            {"Sven", 2f},
+            {"Jakub", 2.5f},
+            {"Conor", 3.2f},
+        };
+
         [SerializeField] private string apiUrl = "https://judgementdayapi.vercel.app";
 
         private void Awake()
@@ -48,7 +63,7 @@ namespace Scoring
                         var result = JsonConvert.DeserializeObject<StatResult>(response.Text);
                         t.TrySetResult(result.stats);
                     })
-                    .Catch(error => { t.TrySetResult(new Dictionary<string, float>()); });
+                    .Catch(error => { t.TrySetResult(FallbackValues); });
 
                 //RestClient.Get(url).Then(response =>
                 //{
@@ -58,7 +73,7 @@ namespace Scoring
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                t.TrySetResult(new Dictionary<string, float>());
+                t.TrySetResult(FallbackValues);
             }
 
             return Task.Run(() => t.Task);
