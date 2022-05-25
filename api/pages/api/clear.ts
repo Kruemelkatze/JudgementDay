@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import NextCors from 'nextjs-cors'
 import { clear } from '../../helper/dbHelper'
 const { PASSWORD } = process.env
 
@@ -32,6 +33,13 @@ export default async function handler(
   }
 
   await clear();
+
+  await NextCors(req, res, {
+    // Options
+    methods: ['POST'],
+    origin: '*',
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+ });
 
   return res.status(200).json({ success: true, time: Date.now(), message: '' })
 }
